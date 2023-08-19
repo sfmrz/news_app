@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
+import { GetdataService } from '../getdata.service';
+import { ModalController } from '@ionic/angular';
+import { ArticleModalComponent } from '../article-modal/article-modal.component';
 
 @Component({
   selector: 'app-tab1',
@@ -6,7 +9,28 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  data: any;
+  filteredData: any;
 
-  constructor() {}
+  constructor(
+    public getdata: GetdataService,
+    private modalController: ModalController,
+  ) {}
 
+  ngOnInit() {
+    this.getdata.doGetTabOne().subscribe(res => {
+      this.data = res.data.articles;
+    });
+  }
+
+  async openArticleModal(article: any) {
+    const modal = await this.modalController.create({
+      component: ArticleModalComponent,
+      componentProps: {
+        article: article
+      }
+    });
+
+    return await modal.present();
+  }
 }

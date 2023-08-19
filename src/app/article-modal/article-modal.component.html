@@ -1,0 +1,25 @@
+<!-- <p (click)="goToHomePage()">
+  {{article.title}}
+</p> -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="article-modal.component.scss">
+</head>
+<body>
+  <header>
+    <h1 (click)="goToHomePage()">{{article.title}}</h1>
+  </header>
+  <main>
+    <section class="news-list">
+        <img [src]="article.urlToImage">
+        <h2>{{article.author}} - {{article.publishedAt}}</h2>
+        <p>{{article.content}}</p>
+        <a [href]="article.url"> Read in the source </a>
+      <!-- Repeat the above article block for each news item -->
+    </section>
+  </main>
+
+</body>
+
